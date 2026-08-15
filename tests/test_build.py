@@ -73,6 +73,15 @@ class TestBuild(unittest.TestCase):
         self.assertEqual("python", self.snippets[0].topic)
         self.assertEqual(["alpha", "beta"], self.snippets[1].tags)
 
+    def test_same_day_snippets_sort_alphabetically(self):
+        same_day = self.tmp / "til" / "python"
+        for title in ("Zebra note", "Alpha note"):
+            (same_day / ("%s.md" % title.split()[0].lower())).write_text(
+                "---\ndate: 2025-06-01\n---\n\n# %s\n\nBody.\n" % title, encoding="utf-8"
+            )
+        titles = [s.title for s in content.collect(self.tmp, self.config)]
+        self.assertEqual(["Alpha note", "Zebra note"], titles[:2])
+
     def test_front_matter_date_wins(self):
         self.assertEqual("2024-01-02", self.snippets[1].date.date().isoformat())
 

@@ -180,7 +180,9 @@ def collect(root: Path, config: dict) -> list[Snippet]:
         snippet.created = snippet.created or (tracked[0] if tracked else mtime)
         snippet.updated = snippet.updated or (tracked[1] if tracked else snippet.created)
         snippets.append(snippet)
-    snippets.sort(key=lambda item: (item.date, item.title), reverse=True)
+    # Newest first, with same-day snippets in alphabetical order.
+    snippets.sort(key=lambda item: item.title.lower())
+    snippets.sort(key=lambda item: item.date, reverse=True)
     return snippets
 
 

@@ -326,7 +326,7 @@ class SiteBuilder:
         for topic, items in self.topics.items():
             lines.append("### %s" % self.label(topic))
             lines.append("")
-            for snippet in sorted(items, key=lambda s: s.date, reverse=True):
+            for snippet in items:  # already newest first from collect()
                 # Escape emphasis characters so titles like __slots__ survive
                 # GitHub's own Markdown rendering of this file.
                 title = re.sub(r"([_*])", r"\\\1", snippet.title)
