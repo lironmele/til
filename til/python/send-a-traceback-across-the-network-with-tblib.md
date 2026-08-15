@@ -100,7 +100,7 @@ Traceback (most recent call last):
 RuntimeError: request failed
 ```
 
-## Four things that bit me
+## Notes
 
 **`install()` snapshots the exception classes that exist right now.** With no
 arguments it walks `BaseException.__subclasses__()` once and registers a reducer
@@ -126,27 +126,7 @@ traceback prints frames with no code under them, and if it has a *different
 version* checked out at that path, it cheerfully prints the wrong line. Line
 numbers plus function names are the trustworthy part.
 
-**Locals are dropped**, so loguru's `diagnose=True` annotations are empty for
-the server frames. `install` can capture them, as long as you reduce them to
-something safely picklable:
-
-```python
-pickling_support.install(get_locals=lambda frame: {k: repr(v) for k, v in frame.f_locals.items()})
-```
-
-Reprs only — do not ship live objects, and remember that locals are exactly
-where connection strings and tokens hang out.
-
 One cosmetic note: loguru's default `backtrace=True` walks `f_back` from the
 rebuilt frames and ends up printing two `tblib/pickling_support.py` frames in
 the middle of the trace. `logger.add(sink, backtrace=False, diagnose=False)` on
 the client sink gives a clean stack.
-
-## When not to bother
-
-This is `pickle`, so it is only safe on a trusted internal channel — never
-`loads` a blob from anywhere you would not run code from. If the boundary is not
-trusted, or the client is not Python, send
-`"".join(traceback.format_exception(exc))` as a string field instead. You lose
-the ability to re-raise and inspect, but a preformatted stack in an Elastic
-document reads exactly the same.
