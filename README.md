@@ -63,6 +63,10 @@ every push. Search is client-side: titles and summaries filter instantly, and
 
 ## Index
 
-_No snippets yet._
+### Python
+
+* [Send a traceback across the network with tblib](til/python/send-a-traceback-across-the-network-with-tblib.md) - 2026-08-15
+
+_1 snippet across 1 topic._
 
 <!-- index ends -->
