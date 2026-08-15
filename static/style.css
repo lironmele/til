@@ -178,6 +178,24 @@ main { padding-top: 2rem; }
 }
 .empty { color: var(--muted); }
 
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.empty-state p:first-child { margin-top: 0; }
+.empty-state code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.08em 0.32em;
+}
+.empty-state .code-block code { background: none; border: 0; padding: 0; }
+
 /* Breadcrumb + meta */
 .breadcrumb { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
 .breadcrumb a { color: var(--muted); }

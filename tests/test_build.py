@@ -104,7 +104,7 @@ class TestBuild(unittest.TestCase):
         index = self.read("index.html")
         self.assertIn('href="python/first-note.html"', index)
         self.assertIn('href="python/second-note.html"', index)
-        self.assertIn("2 snippets across 1 topics", index)
+        self.assertIn("2 snippets across 1 topic ", index)
 
     def test_snippet_page_renders_body_and_meta(self):
         page = self.read("python/first-note.html")
@@ -152,14 +152,27 @@ class TestBuild(unittest.TestCase):
         self.assertIn("Footer.", readme)
         self.assertNotIn("stale", readme)
 
-    def test_no_snippets_still_builds(self):
+    def test_no_snippets_builds_an_empty_state(self):
         empty = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, empty)
         shutil.copytree(ROOT / "templates", empty / "templates")
         shutil.copytree(ROOT / "static", empty / "static")
         config = content.load_config(empty)
         SiteBuilder(empty, config, content.collect(empty, config)).build()
-        self.assertTrue((empty / "site" / "index.html").exists())
+        index = (empty / "site" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Nothing here yet.", index)
+        self.assertIn("No snippets yet. Add the first one with:", index)
+        self.assertIn("_No snippets yet._", (empty / "README.md").read_text(encoding="utf-8"))
+        # the feed and search index stay valid, just empty
+        self.assertIn("<feed", (empty / "site" / "feed.xml").read_text(encoding="utf-8"))
+        self.assertEqual([], json.loads((empty / "site" / "search.json").read_text())["items"])
+
+    def test_singular_counts(self):
+        from tilbuild.render import plural
+
+        self.assertEqual("1 snippet", plural(1, "snippet"))
+        self.assertEqual("0 snippets", plural(0, "snippet"))
+        self.assertIn('<p class="counts">2 snippets</p>', self.read("python/index.html"))
 
 
 if __name__ == "__main__":

@@ -63,33 +63,6 @@ every push. Search is client-side: titles and summaries filter instantly, and
 
 ## Index
 
-### CSS
-
-* [color-mix() makes one accent colour into a palette](til/css/color-mix.md) - 2026-08-15
-
-### Git
-
-* [Find and restore a file deleted long ago](til/git/recover-a-deleted-file.md) - 2026-08-15
-* [Four ways to undo the last commit](til/git/undo-the-last-commit.md) - 2026-08-15
-
-### JavaScript
-
-* [structuredClone() for real deep copies](til/javascript/structured-clone.md) - 2026-08-15
-
-### Python
-
-* [Dataclasses can generate \_\_slots\_\_ for you](til/python/dataclass-slots.md) - 2026-08-15
-* [Serve any directory with http.server --directory](til/python/http-server-directory.md) - 2026-08-15
-
-### Shell
-
-* [Run a command in parallel with xargs -P](til/shell/xargs-in-parallel.md) - 2026-08-15
-
-### SQLite
-
-* [Import a CSV into SQLite from the shell](til/sqlite/import-a-csv-file.md) - 2026-08-15
-* [SQLite has JSON arrow operators](til/sqlite/json-arrow-operators.md) - 2026-08-15
-
-_9 snippets across 6 topics._
+_No snippets yet._
 
 <!-- index ends -->

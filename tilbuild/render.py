@@ -44,6 +44,10 @@ def escape(text: str) -> str:
     return escape_attr(text).replace(">", "&gt;")
 
 
+def plural(count: int, noun: str) -> str:
+    return "%d %s%s" % (count, noun, "" if count == 1 else "s")
+
+
 class SiteBuilder:
     def __init__(self, root: Path, config: dict, snippets: list[Snippet]) -> None:
         self.root = root
@@ -137,6 +141,26 @@ class SiteBuilder:
             else:
                 shutil.copytree(item, self.output / item.name, dirs_exist_ok=True)
 
+    EMPTY_STATE = (
+        '<div class="empty-state">'
+        "<p>No snippets yet. Add the first one with:</p>"
+        '<div class="code-block"><pre><code>'
+        "python3 build.py new python &quot;Something I learned&quot;\n"
+        "python3 build.py --serve"
+        "</code></pre></div>"
+        "<p>Every snippet is a Markdown file under <code>til/&lt;topic&gt;/</code>. "
+        "The first heading becomes the title and the folder name becomes the topic.</p>"
+        "</div>"
+    )
+
+    def counts_line(self) -> str:
+        if not self.snippets:
+            return "Nothing here yet."
+        return "%s across %s &middot; newest first" % (
+            plural(len(self.snippets), "snippet"),
+            plural(len(self.topics), "topic"),
+        )
+
     def build_index(self) -> None:
         chips = "\n".join(
             '<a class="chip" href="%s/index.html">%s <span class="n">%d</span></a>'
@@ -147,10 +171,11 @@ class SiteBuilder:
             "index.html",
             site_title=escape(self.config["title"]),
             description=escape(self.config["description"]),
-            count=str(len(self.snippets)),
-            topic_count=str(len(self.topics)),
+            counts=self.counts_line(),
             topic_chips=chips,
             items="\n".join(self.list_item(snippet, "") for snippet in self.snippets),
+            empty_state="" if self.snippets else self.EMPTY_STATE,
+            hide_when_empty="" if self.snippets else " hidden",
         )
         self.write(
             "index.html",
@@ -169,7 +194,7 @@ class SiteBuilder:
                 "topic.html",
                 root="../",
                 topic=escape(label),
-                count=str(len(items)),
+                counts=plural(len(items), "snippet"),
                 items="\n".join(self.list_item(item, "../", show_topic=False) for item in items),
             )
             self.write(
@@ -177,7 +202,7 @@ class SiteBuilder:
                 self.page(
                     content,
                     title="%s - %s" % (label, self.config["title"]),
-                    description="%d snippets about %s." % (len(items), label),
+                    description="%s about %s." % (plural(len(items), "snippet"), label),
                     prefix="../",
                 ),
             )
@@ -322,6 +347,8 @@ class SiteBuilder:
     # -- repository README ----------------------------------------------
 
     def readme_index(self) -> str:
+        if not self.snippets:
+            return "## Index\n\n_No snippets yet._"
         lines = ["## Index", ""]
         for topic, items in self.topics.items():
             lines.append("### %s" % self.label(topic))
@@ -334,7 +361,9 @@ class SiteBuilder:
                     "* [%s](%s) - %s" % (title, snippet.source_path, snippet.date.date().isoformat())
                 )
             lines.append("")
-        lines.append("_%d snippets across %d topics._" % (len(self.snippets), len(self.topics)))
+        lines.append(
+            "_%s across %s._" % (plural(len(self.snippets), "snippet"), plural(len(self.topics), "topic"))
+        )
         return "\n".join(lines)
 
     def write_readme(self) -> None:
