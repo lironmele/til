@@ -1,0 +1,21 @@
+<div class="hero">
+  <h1>{{ site_title }}</h1>
+  <p class="tagline">{{ description }}</p>
+  <p class="counts">{{ count }} snippets across {{ topic_count }} topics &middot; newest first</p>
+</div>
+
+<div class="search" data-search-root>
+  <label class="visually-hidden" for="q">Search snippets</label>
+  <input id="q" type="search" placeholder="Search titles, topics and contents&hellip;" autocomplete="off" spellcheck="false">
+  <p class="search-status" data-search-status aria-live="polite"></p>
+</div>
+
+<nav class="topics" aria-label="Topics">
+{{ topic_chips }}
+</nav>
+
+<ol class="til-list" data-til-list>
+{{ items }}
+</ol>
+
+<p class="empty" data-empty hidden>No snippets match that search.</p>

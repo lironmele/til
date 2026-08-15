@@ -1,0 +1,17 @@
+{
+  "title": "TIL",
+  "description": "Small things I learned, written down before I forget them.",
+  "author": "lironmele",
+  "base_url": "https://lironmele.github.io/til/",
+  "repo_url": "https://github.com/lironmele/til",
+  "source_dir": "til",
+  "output_dir": "site",
+  "topic_names": {
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "sqlite": "SQLite",
+    "git": "Git",
+    "python": "Python",
+    "shell": "Shell"
+  }
+}

@@ -1,0 +1,20 @@
+<nav class="breadcrumb"><a href="{{ root }}index.html">Home</a> <span aria-hidden="true">/</span> <a href="{{ topic_url }}">{{ topic }}</a></nav>
+
+<article class="til">
+  <header class="til-header">
+    <h1>{{ title }}</h1>
+    <p class="meta">{{ meta }}</p>
+    {{ tags }}
+  </header>
+  {{ toc }}
+  <div class="prose">
+{{ body }}
+  </div>
+  <footer class="til-footer">
+    <p><a href="{{ edit_url }}">Edit this snippet on GitHub</a></p>
+  </footer>
+</article>
+
+<nav class="pager">
+{{ pager }}
+</nav>

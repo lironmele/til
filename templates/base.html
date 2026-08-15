@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ description }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="{{ root }}style.css">
+<link rel="alternate" type="application/atom+xml" title="{{ site_title }}" href="{{ root }}feed.xml">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#128161;</text></svg>">
+{{ head_extra }}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-name" href="{{ root }}index.html">{{ site_title }}</a>
+    <nav class="site-nav">
+      <a href="{{ root }}index.html">All</a>
+      <a href="{{ root }}feed.xml">Feed</a>
+      <a href="{{ repo_url }}">Source</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+{{ content }}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>{{ footer }}</p>
+  </div>
+</footer>
+<script src="{{ root }}til.js" defer></script>
+</body>
+</html>
