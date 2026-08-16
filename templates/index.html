@@ -1,4 +1,5 @@
 <div class="hero">
+  <p class="stamp-line"><span class="stamp">Case file</span></p>
   <h1>{{ site_title }}</h1>
   <p class="tagline">{{ description }}</p>
   <p class="counts">{{ counts }}</p>
@@ -6,7 +7,7 @@
 
 <div class="search" data-search-root{{ hide_when_empty }}>
   <label class="visually-hidden" for="q">Search snippets</label>
-  <input id="q" type="search" placeholder="Search titles, topics and contents&hellip;" autocomplete="off" spellcheck="false">
+  <input id="q" type="search" placeholder="Search the case files&hellip;" autocomplete="off" spellcheck="false">
   <p class="search-status" data-search-status aria-live="polite"></p>
 </div>
 
@@ -18,5 +19,5 @@
 {{ items }}
 </ol>
 
-<p class="empty" data-empty hidden>No snippets match that search.</p>
+<p class="empty" data-empty hidden>No leads match that search.</p>
 {{ empty_state }}
