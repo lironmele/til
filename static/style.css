@@ -1,5 +1,5 @@
 :root {
-  /* Case file: manila paper, ink, and a red evidence stamp. */
+  /* Manila paper, ink, and a red pencil. */
   --bg: #f4efe3;
   --surface: #fffdf6;
   --border: #ddd2bb;
@@ -22,7 +22,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Same case, worked by lamplight. */
+    /* The same page, read by lamplight. */
     --bg: #14171b;
     --surface: #1c2027;
     --border: #30363f;
@@ -89,7 +89,6 @@ a:hover { text-decoration-thickness: 2px; }
   padding-top: 0.6rem;
   flex-wrap: wrap;
 }
-.brand { display: flex; flex-direction: column; gap: 0.1rem; }
 .site-name {
   font-family: var(--typewriter);
   font-weight: 700;
@@ -98,14 +97,6 @@ a:hover { text-decoration-thickness: 2px; }
   letter-spacing: 0.16em;
   color: var(--text);
   text-decoration: none;
-}
-.site-motto {
-  margin: 0;
-  font-family: var(--typewriter);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
 }
 .site-nav {
   display: flex;
@@ -148,21 +139,6 @@ main { padding-top: 2rem; }
   font-size: 0.8rem;
 }
 
-.stamp-line { margin: 0 0 0.6rem; }
-.stamp {
-  display: inline-block;
-  padding: 0.12rem 0.55rem;
-  border: 2px solid var(--accent);
-  border-radius: 3px;
-  color: var(--accent);
-  font-family: var(--typewriter);
-  font-size: 0.66rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  opacity: 0.85;
-  transform: rotate(-3deg);
-}
 
 /* Search */
 .search { position: relative; margin-bottom: 1.25rem; }
@@ -224,7 +200,7 @@ main { padding-top: 2rem; }
 .chip:hover { border-color: var(--accent); }
 .chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* Listings: every snippet is one more print in the trail. */
+/* Listings */
 .til-list { list-style: none; margin: 0; padding: 0; }
 .til-list li {
   position: relative;
@@ -279,13 +255,6 @@ main { padding-top: 2rem; }
   font-size: 0.95rem;
 }
 .empty-state p:first-child { margin-top: 0; }
-.empty-state .lead {
-  color: var(--text);
-  font-family: var(--typewriter);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.8rem;
-}
 .empty-state code {
   font-family: var(--mono);
   font-size: 0.86em;

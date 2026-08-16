@@ -69,8 +69,8 @@ class SiteBuilder:
     def page(self, content: str, *, title: str, description: str, prefix: str, og_type: str = "website") -> str:
         site_title = self.config["title"]
         author = self.config.get("author", "")
-        footer = "Filed by a small Python script. %s" % (
-            "Case notes by %s." % escape(author) if author else ""
+        footer = "Built with a small Python script. %s" % (
+            "Snippets by %s." % escape(author) if author else ""
         )
         return self.templates.render(
             "base.html",
@@ -143,7 +143,6 @@ class SiteBuilder:
 
     EMPTY_STATE = (
         '<div class="empty-state">'
-        '<p class="lead">The case board is bare</p>'
         "<p>No snippets yet. Add the first one with:</p>"
         '<div class="code-block"><pre><code>'
         "python3 build.py new python &quot;Something I learned&quot;\n"
@@ -157,7 +156,7 @@ class SiteBuilder:
     def counts_line(self) -> str:
         if not self.snippets:
             return "Nothing here yet."
-        return "%s across %s &middot; freshest lead first" % (
+        return "%s across %s &middot; newest first" % (
             plural(len(self.snippets), "snippet"),
             plural(len(self.topics), "topic"),
         )
@@ -259,7 +258,7 @@ class SiteBuilder:
             '<li class="level-%d"><a href="#%s">%s</a></li>' % (level, anchor, escape(text))
             for level, anchor, text in entries
         )
-        return '<details class="toc"><summary>Leads on this page</summary><ul>\n%s\n</ul></details>' % links
+        return '<details class="toc"><summary>On this page</summary><ul>\n%s\n</ul></details>' % links
 
     def edit_url(self, snippet: Snippet) -> str:
         repo = self.config.get("repo_url", "").rstrip("/")

@@ -88,7 +88,7 @@
       if (empty) empty.hidden = shown !== 0;
       if (status) {
         status.textContent = tokens.length
-          ? shown + " of " + items.length + " case files match"
+          ? shown + " of " + items.length + " snippets match"
           : "";
       }
     }
